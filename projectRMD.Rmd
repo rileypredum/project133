@@ -1,0 +1,117 @@
+---
+title: "Final Project"
+author: "Riley Predum, Crystal Chang, Logan Murphy, and Carson Messer"
+date: "April 20, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(DataComputing)
+library(rvest)
+library(dplyr)
+library(ggplot2)
+library(XML)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Load separate year data tables into R session
+flights_2007 <- read.csv("C:/Users/riley/Desktop/Coding/STAT133/project133/2007_delays.csv")
+flights_2008 <- read.csv("C:/Users/riley/Desktop/Coding/STAT133/project133/2008_delays.csv")
+flights_2009 <- read.csv("C:/Users/riley/Desktop/Coding/STAT133/project133/2009_delays.csv")
+```
+
+```{r}
+#join the three data tables into one data frame
+flight_delays <- (rbind(as.data.frame(flights_2007),as.data.frame(flights_2008), as.data.frame(flights_2009)))
+```
+
+```{r}
+#add total delay time as sum of departure delay and arrival delay
+flight_delays <- flight_delays %>%
+  mutate(TOTAL_DELAY = DEP_DELAY + ARR_DELAY) %>%
+  mutate(as.factor(flight_delays$YEAR))
+head(flight_delays)
+```
+
+```{r}
+#drop ORIGIN column because it is only SFO now and drop year because it is as int 
+#and we want factor with 3 levels for geom_point aes
+flight_delays_SFO <- flight_delays[-c(1, 5, 9)] %>% filter(flight_delays$ORIGIN == "SFO")
+colnames(flight_delays_SFO)[names(flight_delays_SFO)=="as.factor(flight_delays$YEAR)"] <- "YEAR"
+head(flight_delays_SFO)
+
+flight_delays_SFO <- flight_delays_SFO[-(8)]
+head(flight_delays_SFO)
+```
+
+```{r}
+#plot arrival delay and departure delay, faceted by year; where there's arrival delay there's departure delay, and vice verse
+flight_delays_SFO %>%
+  ggplot(aes(x = DEP_DELAY, y = ARR_DELAY)) + 
+  geom_point(position = "jitter") + facet_grid(. ~ YEAR)
+```
+```{r}
+#plot day of the month and total delay, faceted by year; more 
+flight_delays_SFO %>%
+  ggplot(aes(x = DAY_OF_MONTH, y = TOTAL_DELAY)) + 
+  geom_point(position = 'jitter') + facet_grid(. ~ YEAR)
+```
+
+```{r}
+head(flight_delays_SFO)
+summary(flight_delays_SFO$TOTAL_DELAY)
+```
+
+```{r}
+#histogram showing total delay and frequency, color by year
+flight_delays_SFO %>% ggplot(aes(x = flight_delays_SFO$TOTAL_DELAY)) + geom_histogram(aes(fill=YEAR), position = 'dodge')
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
