@@ -16,9 +16,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 #Load separate year data tables into R session
-flights_2007 <- read.csv("C:/Users/riley/Desktop/Coding/STAT133/project133/2007_delays.csv")
-flights_2008 <- read.csv("C:/Users/riley/Desktop/Coding/STAT133/project133/2008_delays.csv")
-flights_2009 <- read.csv("C:/Users/riley/Desktop/Coding/STAT133/project133/2009_delays.csv")
+flights_2007 <- read.csv("https://raw.githubusercontent.com/rileypredum/project133/master/2007_delays.csv")
+flights_2008 <- read.csv("https://raw.githubusercontent.com/rileypredum/project133/master/2008_delays.csv")
+flights_2009 <- read.csv("https://raw.githubusercontent.com/rileypredum/project133/master/2009_delays.csv")
 ```
 
 ```{r}
